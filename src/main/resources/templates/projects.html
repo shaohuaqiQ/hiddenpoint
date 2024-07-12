@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Project List</h1>
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Project Name</th>
+            <th>Project Description</th>
+            <th>Project URL</th>
+            <th>Project Status</th>
+            <th>Project Owner</th>
+            <th>Creator</th>
+            <th>Online Date</th>
+            <th>Offline Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="project : ${projectEntities}">
+            <td th:text="${project.id}"></td>
+            <td th:text="${project.projectName}"></td>
+            <td th:text="${project.projectDesc}"></td>
+            <td th:text="${project.projectUrl}"></td>
+            <td th:text="${project.projectStatus}"></td>
+            <td th:text="${project.projectOwner}"></td>
+            <td th:text="${project.creator}"></td>
+            <td th:text="${project.onlineDate}"></td>
+            <td th:text="${project.offlineDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
