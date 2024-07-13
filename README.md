@@ -2,122 +2,65 @@
 
 ## 项目简介
 
-HiddenPoint 是一个基于 Spring Boot 构建的 Web 应用程序。该项目展示了如何使用 Spring Boot 和 Thymeleaf 构建一个完整的 Web 应用程序，包括数据的增删改查 (CRUD) 操作。
+HiddenPoint 是一个埋点管理平台，旨在帮助开发者和分析师管理和监控应用中的埋点事件。该平台支持创建、更新、删除和查看各种埋点数据，如项目、页面、模块、事件、参数和资源关系。
 
-## 主要功能
+## 功能描述
 
-- **项目管理**：展示所有项目的列表，支持按 ID 查询单个项目。
-- **页面管理**：展示所有页面的列表，支持按 ID 查询单个页面。
-- **模块管理**：展示所有模块的列表，支持按 ID 查询单个模块。
-- **事件管理**：展示所有事件的列表，支持按 ID 查询单个事件。
-- **参数管理**：展示所有参数的列表，支持按 ID 查询单个参数。
-- **项目资源管理**：展示所有项目资源的列表，支持按 ID 查询单个项目资源。
-- **页面模块关系管理**：展示所有页面模块关系的列表，支持按 ID 查询单个页面模块关系。
+- **项目管理**: 创建、更新、删除和查看项目。
+- **页面管理**: 创建、更新、删除和查看页面。
+- **模块管理**: 创建、更新、删除和查看模块。
+- **事件管理**: 创建、更新、删除和查看事件。
+- **参数管理**: 创建、更新、删除和查看参数。
+- **页面模块关系管理**: 创建、更新、删除和查看页面和模块之间的关系。
+- **项目资源管理**: 创建、更新、删除和查看项目资源。
 
-## 技术栈
+## 安装和运行指南
 
-- **后端**：
-  - Spring Boot
-  - Spring Data JPA
-  - Hibernate
-  - MySQL
+### 先决条件
 
-- **前端**：
-  - Thymeleaf
-  - Bootstrap
+- [Java JDK 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- [Maven](https://maven.apache.org/install.html)
+- [MySQL](https://dev.mysql.com/downloads/mysql/)
 
-## 项目结构
+### 克隆仓库
 
-```
-hiddenpoint
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com
-│   │   │       └── shaohua
-│   │   │           └── hiddenpoint
-│   │   │               ├── controller
-│   │   │               │   ├── ProjectController.java
-│   │   │               │   ├── PageController.java
-│   │   │               │   ├── ModuleController.java
-│   │   │               │   ├── EventController.java
-│   │   │               │   ├── ParameterController.java
-│   │   │               │   ├── ProjectResourceController.java
-│   │   │               │   └── PageModuleRelationController.java
-│   │   │               ├── entity
-│   │   │               │   ├── ProjectEntity.java
-│   │   │               │   ├── PageEntity.java
-│   │   │               │   ├── ModuleEntity.java
-│   │   │               │   ├── EventEntity.java
-│   │   │               │   ├── ParameterEntity.java
-│   │   │               │   ├── ProjectResourceEntity.java
-│   │   │               │   └── PageModuleRelationEntity.java
-│   │   │               ├── repository
-│   │   │               │   ├── ProjectRepository.java
-│   │   │               │   ├── PageRepository.java
-│   │   │               │   ├── ModuleRepository.java
-│   │   │               │   ├── EventRepository.java
-│   │   │               │   ├── ParameterRepository.java
-│   │   │               │   ├── ProjectResourceRepository.java
-│   │   │               │   └── PageModuleRelationRepository.java
-│   │   │               ├── service
-│   │   │               │   ├── ProjectService.java
-│   │   │               │   ├── PageService.java
-│   │   │               │   ├── ModuleService.java
-│   │   │               │   ├── EventService.java
-│   │   │               │   ├── ParameterService.java
-│   │   │               │   ├── ProjectResourceService.java
-│   │   │               │   └── PageModuleRelationService.java
-│   │   │               └── service.impl
-│   │   │                   ├── ProjectServiceImpl.java
-│   │   │                   ├── PageServiceImpl.java
-│   │   │                   ├── ModuleServiceImpl.java
-│   │   │                   ├── EventServiceImpl.java
-│   │   │                   ├── ParameterServiceImpl.java
-│   │   │                   ├── ProjectResourceServiceImpl.java
-│   │   │                   └── PageModuleRelationServiceImpl.java
-│   │   ├── resources
-│   │   │   ├── templates
-│   │   │   │   └── projects.html
-│   │   │   │   └── pages.html
-│   │   │   │   └── modules.html
-│   │   │   │   └── events.html
-│   │   │   │   └── parameters.html
-│   │   │   │   └── project-resources.html
-│   │   │   │   └── page-module-relations.html
-│   │   │   ├── application.properties
-├── pom.xml
-└── README.md
+```sh
+git clone https://github.com/your-username/hiddenpoint.git
+cd hiddenpoint
 ```
 
-## 运行项目
+### 配置数据库
 
-### 前提条件
+1. 创建数据库：
 
-- 安装 Java 11 或更高版本
-- 安装 MySQL 数据库
-- 安装 Maven
+```sql
+CREATE DATABASE hiddenpoint;
+```
 
-### 步骤
+2. 在 `src/main/resources/application.properties` 文件中配置数据库连接：
 
-1. 克隆项目到本地：
-    ```sh
-    git clone https://github.com/yourusername/hiddenpoint.git
-    cd hiddenpoint
-    ```
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/hiddenpoint
+spring.datasource.username=your-username
+spring.datasource.password=your-password
+spring.jpa.hibernate.ddl-auto=update
+```
 
-2. 配置数据库连接：
-    - 修改 `src/main/resources/application.properties` 文件中的数据库连接配置：
-        ```properties
-        spring.datasource.url=jdbc:mysql://localhost:3306/yourdatabase
-        spring.datasource.username=yourusername
-        spring.datasource.password=yourpassword
-        spring.jpa.hibernate.ddl-auto=update
-        ```
+### 构建和运行项目
 
-3. 编译并运行项目：
-    ```sh
-    mvn spring-boot:run
-    ```
+```sh
+mvn clean install
+mvn spring-boot:run
+```
 
-4. 在浏览器中打开 [http://localhost:8080/projects](http://localhost:8080/projects) 查看项目列表。
+项目将运行在 `http://localhost:8080`。
+
+### 访问应用
+
+- 查看所有项目: [http://localhost:8080/projects/getallprojects](http://localhost:8080/projects/getallprojects)
+- 查看所有页面: [http://localhost:8080/pages/getallpages](http://localhost:8080/pages/getallpages)
+- 查看所有模块: [http://localhost:8080/modules/getallmodules](http://localhost:8080/modules/getallmodules)
+- 查看所有事件: [http://localhost:8080/events/getallevents](http://localhost:8080/events/getallevents)
+- 查看所有参数: [http://localhost:8080/parameters/getallparameters](http://localhost:8080/parameters/getallparameters)
+- 查看所有页面模块关系: [http://localhost:8080/page-module-relations/getallrelations](http://localhost:8080/page-module-relations/getallrelations)
+- 查看所有项目资源: [http://localhost:8080/project-resources/getallresources](http://localhost:8080/project-resources/getallresources)
