@@ -21,7 +21,7 @@ public class PageController {
     @Autowired
     private PageService pageService;
 
-    @RequestMapping
+    @RequestMapping("/getallpages")
     public String getAllPages(Model model) {
         logger.info("Entering getAllPages method");
         List<PageEntity> pageEntities = pageService.getAllPages();
@@ -30,7 +30,7 @@ public class PageController {
             logger.info("Page: " + pageEntity.getPageName());
         }
         model.addAttribute("pageEntities", pageEntities);
-        return "pages";
+        return "page/getallpages";
     }
 
     @GetMapping("/{id}")
@@ -42,5 +42,51 @@ public class PageController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("page", new PageEntity());
+        return "page/createpage";
+    }
+
+    @PostMapping("/create")
+    public String createPage(@ModelAttribute PageEntity page) {
+        pageService.createPage(page);
+        return "redirect:/pages/getallpages";
+    }
+
+    @GetMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        Optional<PageEntity> page = pageService.getPageById(id);
+        if (page.isPresent()) {
+            model.addAttribute("page", page.get());
+            return "page/updatepage";
+        } else {
+            return "redirect:/pages/getallpages";
+        }
+    }
+
+    @PostMapping("/update/{id}")
+    public String updatePage(@PathVariable Long id, @ModelAttribute PageEntity page) {
+        pageService.updatePage(id, page);
+        return "redirect:/pages/getallpages";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String showDeleteForm(@PathVariable Long id, Model model) {
+        Optional<PageEntity> page = pageService.getPageById(id);
+        if (page.isPresent()) {
+            model.addAttribute("page", page.get());
+            return "page/deletepage";
+        } else {
+            return "redirect:/pages/getallpages";
+        }
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deletePage(@PathVariable Long id) {
+        pageService.deletePage(id);
+        return "redirect:/pages/getallpages";
     }
 }

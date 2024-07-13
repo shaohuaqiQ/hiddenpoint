@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Module</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Create New Module</h1>
+    <form th:action="@{/modules/create}" th:object="${module}" method="post">
+        <div class="form-group">
+            <label for="moduleName">Module Name</label>
+            <input type="text" id="moduleName" th:field="*{moduleName}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="moduleIdentifier">Identifier</label>
+            <input type="text" id="moduleIdentifier" th:field="*{moduleIdentifier}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="moduleOwner">Owner</label>
+            <input type="text" id="moduleOwner" th:field="*{moduleOwner}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="moduleDesc">Description</label>
+            <input type="text" id="moduleDesc" th:field="*{moduleDesc}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="moduleStatus">Status</label>
+            <input type="text" id="moduleStatus" th:field="*{moduleStatus}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="triggerTimes">Trigger Times</label>
+            <input type="text" id="triggerTimes" th:field="*{triggerTimes}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="sampleImages">Sample Images</label>
+            <input type="text" id="sampleImages" th:field="*{sampleImages}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="moduleEvents">Module Events</label>
+            <input type="text" id="moduleEvents" th:field="*{moduleEvents}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="creator">Creator</label>
+            <input type="text" id="creator" th:field="*{creator}" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a class="btn btn-secondary" href="/modules/getallmodules">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

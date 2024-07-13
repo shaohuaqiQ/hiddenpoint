@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Modules</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">All Modules</h1>
+    <a class="btn btn-primary mb-3" href="/modules/create">Create New Module</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Module Name</th>
+            <th>Identifier</th>
+            <th>Owner</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Trigger Times</th>
+            <th>Sample Images</th>
+            <th>Module Events</th>
+            <th>Creator</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="module : ${moduleEntities}">
+            <td th:text="${module.id}"></td>
+            <td th:text="${module.moduleName}"></td>
+            <td th:text="${module.moduleIdentifier}"></td>
+            <td th:text="${module.moduleOwner}"></td>
+            <td th:text="${module.moduleDesc}"></td>
+            <td th:text="${module.moduleStatus}"></td>
+            <td th:text="${module.triggerTimes}"></td>
+            <td th:text="${module.sampleImages}"></td>
+            <td th:text="${module.moduleEvents}"></td>
+            <td th:text="${module.creator}"></td>
+            <td>
+                <a class="btn btn-warning btn-sm" th:href="@{/modules/update/{id}(id=${module.id})}">Update</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/modules/delete/{id}(id=${module.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -21,13 +21,13 @@ public class PageModuleRelationController {
     @Autowired
     private PageModuleRelationService pageModuleRelationService;
 
-    @RequestMapping
+    @RequestMapping("/getallrelations")
     public String getAllPageModuleRelations(Model model) {
         logger.info("Entering getAllPageModuleRelations method");
         List<PageModuleRelationEntity> pageModuleRelationEntities = pageModuleRelationService.getAllPageModuleRelations();
         logger.info("Number of page-module-relations retrieved: " + pageModuleRelationEntities.size());
         model.addAttribute("pageModuleRelationEntities", pageModuleRelationEntities);
-        return "page-module-relations";
+        return "pagemodulerelation/getallrelations";
     }
 
     @GetMapping("/{id}")
@@ -39,5 +39,51 @@ public class PageModuleRelationController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("pageModuleRelation", new PageModuleRelationEntity());
+        return "pagemodulerelation/createpagemodulerelation";
+    }
+
+    @PostMapping("/create")
+    public String createPageModuleRelation(@ModelAttribute PageModuleRelationEntity pageModuleRelation) {
+        pageModuleRelationService.createPageModuleRelation(pageModuleRelation);
+        return "redirect:/page-module-relations/getallrelations";
+    }
+
+    @GetMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        Optional<PageModuleRelationEntity> pageModuleRelation = pageModuleRelationService.getPageModuleRelationById(id);
+        if (pageModuleRelation.isPresent()) {
+            model.addAttribute("pageModuleRelation", pageModuleRelation.get());
+            return "pagemodulerelation/updatepagemodulerelation";
+        } else {
+            return "redirect:/page-module-relations/getallrelations";
+        }
+    }
+
+    @PostMapping("/update/{id}")
+    public String updatePageModuleRelation(@PathVariable Long id, @ModelAttribute PageModuleRelationEntity pageModuleRelation) {
+        pageModuleRelationService.updatePageModuleRelation(id, pageModuleRelation);
+        return "redirect:/page-module-relations/getallrelations";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String showDeleteForm(@PathVariable Long id, Model model) {
+        Optional<PageModuleRelationEntity> pageModuleRelation = pageModuleRelationService.getPageModuleRelationById(id);
+        if (pageModuleRelation.isPresent()) {
+            model.addAttribute("pageModuleRelation", pageModuleRelation.get());
+            return "pagemodulerelation/deletepagemodulerelation";
+        } else {
+            return "redirect:/page-module-relations/getallrelations";
+        }
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deletePageModuleRelation(@PathVariable Long id) {
+        pageModuleRelationService.deletePageModuleRelation(id);
+        return "redirect:/page-module-relations/getallrelations";
     }
 }

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Delete Page</h1>
+    <p>Are you sure you want to delete the page: <span th:text="${page.pageName}"></span>?</p>
+    <form th:action="@{/pages/delete/{id}(id=${page.id})}" method="post">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a class="btn btn-secondary" href="/pages/getallpages">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

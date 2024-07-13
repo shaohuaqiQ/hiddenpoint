@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Page Module Relations</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">All Page Module Relations</h1>
+    <a class="btn btn-primary mb-3" href="/page-module-relations/create">Create New Relation</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Page ID</th>
+            <th>Module ID</th>
+            <th>Relation Status</th>
+            <th>Creator</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="relation : ${pageModuleRelationEntities}">
+            <td th:text="${relation.id}"></td>
+            <td th:text="${relation.pageId}"></td>
+            <td th:text="${relation.moduleId}"></td>
+            <td th:text="${relation.relationStatus}"></td>
+            <td th:text="${relation.creator}"></td>
+            <td>
+                <a class="btn btn-warning btn-sm" th:href="@{/page-module-relations/update/{id}(id=${relation.id})}">Update</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/page-module-relations/delete/{id}(id=${relation.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

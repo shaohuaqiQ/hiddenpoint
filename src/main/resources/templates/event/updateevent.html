@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Event</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Update Event</h1>
+    <form th:action="@{/events/update/{id}(id=${event.id})}" th:object="${event}" method="post">
+        <div class="form-group">
+            <label for="eventName">Event Name</label>
+            <input type="text" id="eventName" th:field="*{eventName}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="eventSource">Event Source</label>
+            <input type="text" id="eventSource" th:field="*{eventSource}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="eventType">Event Type</label>
+            <input type="text" id="eventType" th:field="*{eventType}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="eventStatus">Event Status</label>
+            <input type="text" id="eventStatus" th:field="*{eventStatus}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="eventTriggerWhen">Event Trigger When</label>
+            <input type="text" id="eventTriggerWhen" th:field="*{eventTriggerWhen}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="creator">Creator</label>
+            <input type="text" id="creator" th:field="*{creator}" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a class="btn btn-secondary" href="/events/getallevents">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

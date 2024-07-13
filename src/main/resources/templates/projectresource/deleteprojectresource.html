@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Project Resource</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Delete Project Resource</h1>
+    <p>Are you sure you want to delete the project resource with project ID <span th:text="${projectResource.projectId}"></span> and page ID <span th:text="${projectResource.pageId}"></span>?</p>
+    <form th:action="@{/project-resources/delete/{id}(id=${projectResource.id})}" method="post">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a class="btn btn-secondary" href="/project-resources/getallresources">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

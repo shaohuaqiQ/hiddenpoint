@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Events</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">All Events</h1>
+    <a class="btn btn-primary mb-3" href="/events/create">Create New Event</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Event Name</th>
+            <th>Event Source</th>
+            <th>Event Type</th>
+            <th>Event Status</th>
+            <th>Event Trigger When</th>
+            <th>Creator</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${eventEntities}">
+            <td th:text="${event.id}"></td>
+            <td th:text="${event.eventName}"></td>
+            <td th:text="${event.eventSource}"></td>
+            <td th:text="${event.eventType}"></td>
+            <td th:text="${event.eventStatus}"></td>
+            <td th:text="${event.eventTriggerWhen}"></td>
+            <td th:text="${event.creator}"></td>
+            <td>
+                <a class="btn btn-warning btn-sm" th:href="@{/events/update/{id}(id=${event.id})}">Update</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/events/delete/{id}(id=${event.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

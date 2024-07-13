@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Project Resources</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">All Project Resources</h1>
+    <a class="btn btn-primary mb-3" href="/project-resources/create">Create New Resource</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Project ID</th>
+            <th>Page ID</th>
+            <th>Module ID</th>
+            <th>Relation Status</th>
+            <th>Creator</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="resource : ${projectResourceEntities}">
+            <td th:text="${resource.id}"></td>
+            <td th:text="${resource.projectId}"></td>
+            <td th:text="${resource.pageId}"></td>
+            <td th:text="${resource.moduleId}"></td>
+            <td th:text="${resource.relationStatus}"></td>
+            <td th:text="${resource.creator}"></td>
+            <td>
+                <a class="btn btn-warning btn-sm" th:href="@{/project-resources/update/{id}(id=${resource.id})}">Update</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/project-resources/delete/{id}(id=${resource.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

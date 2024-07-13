@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Page Module Relation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Delete Page Module Relation</h1>
+    <p>Are you sure you want to delete the relation between page ID <span th:text="${pageModuleRelation.pageId}"></span> and module ID <span th:text="${pageModuleRelation.moduleId}"></span>?</p>
+    <form th:action="@{/page-module-relations/delete/{id}(id=${pageModuleRelation.id})}" method="post">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a class="btn btn-secondary" href="/page-module-relations/getallrelations">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

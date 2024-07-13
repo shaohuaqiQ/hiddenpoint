@@ -21,7 +21,7 @@ public class ModuleController {
     @Autowired
     private ModuleService moduleService;
 
-    @RequestMapping
+    @RequestMapping("/getallmodules")
     public String getAllModules(Model model) {
         logger.info("Entering getAllModules method");
         List<ModuleEntity> moduleEntities = moduleService.getAllModules();
@@ -30,7 +30,7 @@ public class ModuleController {
             logger.info("Module: " + moduleEntity.getModuleName());
         }
         model.addAttribute("moduleEntities", moduleEntities);
-        return "modules";
+        return "module/getallmodules";
     }
 
     @GetMapping("/{id}")
@@ -42,5 +42,51 @@ public class ModuleController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("module", new ModuleEntity());
+        return "module/createmodule";
+    }
+
+    @PostMapping("/create")
+    public String createModule(@ModelAttribute ModuleEntity module) {
+        moduleService.createModule(module);
+        return "redirect:/modules/getallmodules";
+    }
+
+    @GetMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        Optional<ModuleEntity> module = moduleService.getModuleById(id);
+        if (module.isPresent()) {
+            model.addAttribute("module", module.get());
+            return "module/updatemodule";
+        } else {
+            return "redirect:/modules/getallmodules";
+        }
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateModule(@PathVariable Long id, @ModelAttribute ModuleEntity module) {
+        moduleService.updateModule(id, module);
+        return "redirect:/modules/getallmodules";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String showDeleteForm(@PathVariable Long id, Model model) {
+        Optional<ModuleEntity> module = moduleService.getModuleById(id);
+        if (module.isPresent()) {
+            model.addAttribute("module", module.get());
+            return "module/deletemodule";
+        } else {
+            return "redirect:/modules/getallmodules";
+        }
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteModule(@PathVariable Long id) {
+        moduleService.deleteModule(id);
+        return "redirect:/modules/getallmodules";
     }
 }

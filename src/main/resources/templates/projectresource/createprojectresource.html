@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Project Resource</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Create New Project Resource</h1>
+    <form th:action="@{/project-resources/create}" th:object="${projectResource}" method="post">
+        <div class="form-group">
+            <label for="projectId">Project ID</label>
+            <input type="number" id="projectId" th:field="*{projectId}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="pageId">Page ID</label>
+            <input type="number" id="pageId" th:field="*{pageId}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="moduleId">Module ID</label>
+            <input type="number" id="moduleId" th:field="*{moduleId}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="relationStatus">Relation Status</label>
+            <input type="text" id="relationStatus" th:field="*{relationStatus}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="creator">Creator</label>
+            <input type="text" id="creator" th:field="*{creator}" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a class="btn btn-secondary" href="/project-resources/getallresources">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

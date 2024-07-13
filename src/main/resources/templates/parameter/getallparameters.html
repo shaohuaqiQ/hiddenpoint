@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Parameters</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">All Parameters</h1>
+    <a class="btn btn-primary mb-3" href="/parameters/create">Create New Parameter</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Parameter Name</th>
+            <th>Description</th>
+            <th>Value</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>Owner</th>
+            <th>Creator</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="parameter : ${parameterEntities}">
+            <td th:text="${parameter.id}"></td>
+            <td th:text="${parameter.parameterName}"></td>
+            <td th:text="${parameter.parameterDesc}"></td>
+            <td th:text="${parameter.parameterValue}"></td>
+            <td th:text="${parameter.parameterStatus}"></td>
+            <td th:text="${parameter.parameterType}"></td>
+            <td th:text="${parameter.parameterOwner}"></td>
+            <td th:text="${parameter.creator}"></td>
+            <td>
+                <a class="btn btn-warning btn-sm" th:href="@{/parameters/update/{id}(id=${parameter.id})}">Update</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/parameters/delete/{id}(id=${parameter.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

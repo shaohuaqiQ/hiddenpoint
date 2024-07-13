@@ -21,7 +21,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @RequestMapping
+    @RequestMapping("/getallevents")
     public String getAllEvents(Model model) {
         logger.info("Entering getAllEvents method");
         List<EventEntity> eventEntities = eventService.getAllEvents();
@@ -30,7 +30,7 @@ public class EventController {
             logger.info("Event: " + eventEntity.getEventName());
         }
         model.addAttribute("eventEntities", eventEntities);
-        return "events";
+        return "event/getallevents";
     }
 
     @GetMapping("/{id}")
@@ -42,5 +42,51 @@ public class EventController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/create")
+    public String showCreateForm(Model model) {
+        model.addAttribute("event", new EventEntity());
+        return "event/createevent";
+    }
+
+    @PostMapping("/create")
+    public String createEvent(@ModelAttribute EventEntity event) {
+        eventService.createEvent(event);
+        return "redirect:/events/getallevents";
+    }
+
+    @GetMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        Optional<EventEntity> event = eventService.getEventById(id);
+        if (event.isPresent()) {
+            model.addAttribute("event", event.get());
+            return "event/updateevent";
+        } else {
+            return "redirect:/events/getallevents";
+        }
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateEvent(@PathVariable Long id, @ModelAttribute EventEntity event) {
+        eventService.updateEvent(id, event);
+        return "redirect:/events/getallevents";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String showDeleteForm(@PathVariable Long id, Model model) {
+        Optional<EventEntity> event = eventService.getEventById(id);
+        if (event.isPresent()) {
+            model.addAttribute("event", event.get());
+            return "event/deleteevent";
+        } else {
+            return "redirect:/events/getallevents";
+        }
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteEvent(@PathVariable Long id) {
+        eventService.deleteEvent(id);
+        return "redirect:/events/getallevents";
     }
 }

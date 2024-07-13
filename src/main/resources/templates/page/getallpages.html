@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Pages</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">All Pages</h1>
+    <a class="btn btn-primary mb-3" href="/pages/create">Create New Page</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Page Name</th>
+            <th>Identifier</th>
+            <th>Owner</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>Trigger Times</th>
+            <th>Sample Images</th>
+            <th>Creator</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="page : ${pageEntities}">
+            <td th:text="${page.id}"></td>
+            <td th:text="${page.pageName}"></td>
+            <td th:text="${page.pageIdentifier}"></td>
+            <td th:text="${page.pageOwner}"></td>
+            <td th:text="${page.pageDesc}"></td>
+            <td th:text="${page.pageStatus}"></td>
+            <td th:text="${page.pageType}"></td>
+            <td th:text="${page.triggerTimes}"></td>
+            <td th:text="${page.sampleImages}"></td>
+            <td th:text="${page.creator}"></td>
+            <td>
+                <a class="btn btn-warning btn-sm" th:href="@{/pages/update/{id}(id=${page.id})}">Update</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/pages/delete/{id}(id=${page.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

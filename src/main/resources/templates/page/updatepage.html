@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Update Page</h1>
+    <form th:action="@{/pages/update/{id}(id=${page.id})}" th:object="${page}" method="post">
+        <div class="form-group">
+            <label for="pageName">Page Name</label>
+            <input type="text" id="pageName" th:field="*{pageName}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="pageIdentifier">Identifier</label>
+            <input type="text" id="pageIdentifier" th:field="*{pageIdentifier}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="pageOwner">Owner</label>
+            <input type="text" id="pageOwner" th:field="*{pageOwner}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="pageDesc">Description</label>
+            <input type="text" id="pageDesc" th:field="*{pageDesc}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="pageStatus">Status</label>
+            <input type="text" id="pageStatus" th:field="*{pageStatus}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="pageType">Type</label>
+            <input type="text" id="pageType" th:field="*{pageType}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="triggerTimes">Trigger Times</label>
+            <input type="text" id="triggerTimes" th:field="*{triggerTimes}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="sampleImages">Sample Images</label>
+            <input type="text" id="sampleImages" th:field="*{sampleImages}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="creator">Creator</label>
+            <input type="text" id="creator" th:field="*{creator}" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a class="btn btn-secondary" href="/pages/getallpages">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

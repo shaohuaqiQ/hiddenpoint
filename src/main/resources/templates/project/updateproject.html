@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Update Project</h1>
+    <form th:action="@{/projects/update/{id}(id=${project.id})}" th:object="${project}" method="post">
+        <div class="form-group">
+            <label for="projectName">Project Name</label>
+            <input type="text" id="projectName" th:field="*{projectName}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="projectDesc">Description</label>
+            <input type="text" id="projectDesc" th:field="*{projectDesc}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="projectUrl">URL</label>
+            <input type="text" id="projectUrl" th:field="*{projectUrl}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="projectStatus">Status</label>
+            <input type="text" id="projectStatus" th:field="*{projectStatus}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="projectOwner">Owner</label>
+            <input type="text" id="projectOwner" th:field="*{projectOwner}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="creator">Creator</label>
+            <input type="text" id="creator" th:field="*{creator}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="onlineDate">Online Date</label>
+            <input type="datetime-local" id="onlineDate" th:field="*{onlineDate}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="offlineDate">Offline Date</label>
+            <input type="datetime-local" id="offlineDate" th:field="*{offlineDate}" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a class="btn btn-secondary" href="/projects/getallprojects">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
